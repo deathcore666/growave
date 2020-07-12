@@ -8,8 +8,8 @@ const initialState: SeamlessImmutable.Immutable<StateInterface> = Immutable({
     results: [],
     country: '',
     isLoading: false,
-    isEmpty: false,
-    countries: []
+    countries: [],
+    isError: false
 });
 
 export const covid = (
@@ -29,8 +29,8 @@ export const covid = (
         case actionTypes.SET_LOADING:
             return state.set('isLoading', action.payload);
 
-        case actionTypes.SET_EMPTY:
-            return state.set('isEmpty', action.payload);
+        case actionTypes.SET_ERROR:
+                return state.set('isError', action.payload);
 
         default: return state;
     }

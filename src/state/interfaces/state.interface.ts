@@ -5,6 +5,6 @@ export interface StateInterface {
     results: ResultInterface[],
     country: string,
     isLoading: boolean,
-    isEmpty: boolean,
-    countries: CountryInterface[]
+    countries: CountryInterface[],
+    isError: boolean
 }

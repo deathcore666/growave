@@ -9,8 +9,9 @@ export const fetchCountries = () => {
         try {
             const res = await axios.get(`https://api.covid19api.com/countries`);
             dispatch(setCountries(res.data));
+            dispatch(setError(false));
         } catch (err) {
-            // do smth
+            dispatch(setError(true)); //429 most prbly
         }
 
         dispatch(setLoading(false));
@@ -30,12 +31,11 @@ export const fetchResults = (country: string) => {
     return async (dispatch: any) => {
         dispatch(setLoading(true));
         try {
-            const res = await axios.get(`https://api.covid19api.com/total/dayone/country/${country}`); //sometimes 429 is returned
+            const res = await axios.get(`https://api.covid19api.com/total/dayone/country/${country}`);
             dispatch(setResults(res.data));
-            const isEmpty = res.data.length === 0;
-            dispatch(setEmpty(isEmpty));       
+            dispatch(setError(false));
         } catch(err) {
-            //do smth
+            dispatch(setError(true)); //429 prbbly
         }
         dispatch(setLoading(false));                                                               
     };
@@ -55,6 +55,15 @@ export const setLoading = (isLoading: boolean) => {
         dispatch({
             type: actionTypes.SET_LOADING,
             payload: isLoading
+        });
+    };
+}
+
+export const setError = (isError: boolean) => {
+    return (dispatch: (arg0: { type: any; payload: any; }) => void) => {
+        dispatch({
+            type: actionTypes.SET_ERROR,
+            payload: isError
         });
     };
 }

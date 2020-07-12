@@ -33,7 +33,7 @@ function Select(props: selectProps) {
             {isOpen && (
                 <div className='dropdown-list-container'>
                     <ul className='dropdown-list'>
-                        { props.countries.map((country, i) => <li onClick={onOptionClicked(country.Slug)} className='list-item'>{country.Country}</li>) }
+                        { props.countries.map((country, i) => <li key={i} onClick={onOptionClicked(country.Slug)} className='list-item'>{country.Country}</li>) }
                     </ul>
                 </div>
             )}

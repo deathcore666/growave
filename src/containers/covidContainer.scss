@@ -4,12 +4,33 @@
     flex-direction: column;
     padding: 80px 40px 40px 40px;
     min-height: 100vh;
+
+    .loading {
+        margin-top: 15px;
+        margin-left: 10px;
+        position: absolute;
+    }
+
+    .empty-response {
+        width: 500px;
+        margin-top: 40px;
+        background-color: white;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: red;
+        border-width: 2px;
+        padding: 5px;
+    }
 }
 
 .results-container {
     display: flex;
     flex-direction: row;
     margin-top: 40px;
+}
+
+.opaque {
+    opacity: 0.5;
 }
 
 .results {

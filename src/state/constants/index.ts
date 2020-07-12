@@ -5,3 +5,4 @@ export const FETCH_RESULTS = 'FETCH_RESULTS';
 export const SET_RESULTS = 'SET_RESULTS';
 export const SET_LOADING = 'SET_LOADING';
 export const SET_EMPTY = 'SET_EMPTY';
+export const SET_ERROR = 'SET_ERROR';
