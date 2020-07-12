@@ -27,7 +27,7 @@ function Select(props: selectProps) {
     return (
         <div className='dropdown-container'>
             <div className='dropdown-header' onClick={toggle}>
-                { country[0].toUpperCase() + country.slice(1) } 
+                { country ? country[0].toUpperCase() + country.slice(1) : ''} 
                 <img src={vector} alt="Logo" />
                 </div>
             {isOpen && (
