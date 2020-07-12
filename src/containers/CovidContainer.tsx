@@ -21,6 +21,12 @@ function CovidContainer() {
     const resultsList = useSelector((state: { covid: StateInterface }) => {
         return state.covid.results;
     });
+    const isEmpty = useSelector((state: { covid: StateInterface }) => {
+        return state.covid.isEmpty;
+    });
+    const isLoading = useSelector((state: { covid: StateInterface }) => {
+        return state.covid.isLoading;
+    });
 
     useEffect(() => {
         if(!country) {
@@ -59,8 +65,8 @@ function CovidContainer() {
         <>
             <Select setCountry={(country) => dispatch(ActionsCreators.setCountry(country))}
                     countries={countriesList}/>
-            <Result results={resultsList}/>
-            { resultsList.length > 0 ? <TopResult { ...findTopRecoveredCasesEntry(resultsList) }/> : <></> }
+            { resultsList.length > 0 ? <Result results={resultsList}/> : <>Results came back empty</> }
+            { resultsList.length > 0 ? <TopResult { ...findTopRecoveredCasesEntry(resultsList) }/> : <>Results came back empty</> }
         </>
     );
 }

@@ -4,11 +4,16 @@ import * as actionTypes from '../constants';
 import { CountryInterface } from '../interfaces/country.interface';
 
 export const fetchCountries = () => {
-    return async (dispatch: any) => { // todo catch and handle request error
+    return async (dispatch: any) => {
         dispatch(setLoading(true));
-        const res = await axios.get(`https://api.covid19api.com/countries`);
-        dispatch(setLoading(true));
-        dispatch(setCountries(res.data));
+        try {
+            const res = await axios.get(`https://api.covid19api.com/countries`);
+            dispatch(setCountries(res.data));
+        } catch (err) {
+            // do smth
+        }
+
+        dispatch(setLoading(false));
     };
 }
 
@@ -24,9 +29,15 @@ export const setCountries = (countries: CountryInterface) => {
 export const fetchResults = (country: string) => {
     return async (dispatch: any) => {
         dispatch(setLoading(true));
-        const res = await axios.get(`https://api.covid19api.com/total/dayone/country/${country}`); //implement err handlin todo
-        dispatch(setLoading(false));                                                               //sometimes 429 is returned
-        dispatch(setResults(res.data));                                                            //do not forget!!!
+        try {
+            const res = await axios.get(`https://api.covid19api.com/total/dayone/country/${country}`); //sometimes 429 is returned
+            dispatch(setResults(res.data));
+            const isEmpty = res.data.length === 0;
+            dispatch(setEmpty(isEmpty));       
+        } catch(err) {
+            //do smth
+        }
+        dispatch(setLoading(false));                                                               
     };
 }
 
@@ -44,6 +55,15 @@ export const setLoading = (isLoading: boolean) => {
         dispatch({
             type: actionTypes.SET_LOADING,
             payload: isLoading
+        });
+    };
+}
+
+export const setEmpty = (isEmpty: boolean) => {
+    return (dispatch: (arg0: { type: any; payload: any; }) => void) => {
+        dispatch({
+            type: actionTypes.SET_EMPTY,
+            payload: isEmpty
         });
     };
 }
