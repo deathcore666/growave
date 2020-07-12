@@ -13,7 +13,6 @@ export const fetchCountries = () => {
         } catch (err) {
             dispatch(setError(true)); //429 most prbly
         }
-
         dispatch(setLoading(false));
     };
 }
@@ -64,15 +63,6 @@ export const setError = (isError: boolean) => {
         dispatch({
             type: actionTypes.SET_ERROR,
             payload: isError
-        });
-    };
-}
-
-export const setEmpty = (isEmpty: boolean) => {
-    return (dispatch: (arg0: { type: any; payload: any; }) => void) => {
-        dispatch({
-            type: actionTypes.SET_EMPTY,
-            payload: isEmpty
         });
     };
 }
