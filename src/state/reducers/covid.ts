@@ -15,7 +15,7 @@ const initialState: SeamlessImmutable.Immutable<StateInterface> = Immutable({
 
 export const covid = (
     state: SeamlessImmutable.Immutable<StateInterface> = initialState, 
-    action: ActionInterface
+    action: any
 ): SeamlessImmutable.Immutable<StateInterface> => {
     switch(action.type) {
         case actionTypes.SET_COUNTRIES:
@@ -25,7 +25,7 @@ export const covid = (
             return state.set('results', action.payload);
 
         case actionTypes.SET_COUNTRY:
-            localStorage.setItem('country', action.payload);
+            // localStorage.setItem('country', action.payload);
             return state.set('country', action.payload);
 
         case actionTypes.SET_LOADING:
