@@ -7,7 +7,7 @@ import storage from 'redux-persist/lib/storage'
 
 import reducers from '../reducers/index';
 import { StateInterface } from '../interfaces/state.interface';
-import ImmutablePersistenceTransform from '../helpers/immutablePersistenceTransform';
+import ImmutablePersistenceTransform from '../../helpers/immutablePersistenceTransform';
 
 const persistConfig = {
     key: 'root',

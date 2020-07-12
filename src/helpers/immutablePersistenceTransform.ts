@@ -1,7 +1,7 @@
 import Immutable from 'seamless-immutable';
 import SeamlessImmutable from 'seamless-immutable';
 
-import { StateInterface } from '../interfaces/state.interface';
+import { StateInterface } from '../state/interfaces/state.interface';
 
 // transformer for redux-persist
 const convertToJs = (state: SeamlessImmutable.Immutable<StateInterface>) => state.asMutable({deep: true});
