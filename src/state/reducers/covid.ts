@@ -25,6 +25,7 @@ export const covid = (
             return state.set('results', action.payload);
 
         case actionTypes.SET_COUNTRY:
+            localStorage.setItem('country', action.payload);
             return state.set('country', action.payload);
 
         case actionTypes.SET_LOADING:

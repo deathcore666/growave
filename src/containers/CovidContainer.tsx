@@ -10,16 +10,7 @@ import { StateInterface } from '../state/interfaces/state.interface';
 import { ResultInterface } from '../state/interfaces/result.interface';
 import { topResultProps } from '../components/top-result/topResult';
 
-interface PropsInterface {
-    resuts: any,
-    country: any,
-    setCountry: any,
-    fetchResults: any,
-    isLoading: any,
-    countries: any
-}
-
-function CovidContainer(props: PropsInterface) {
+function CovidContainer() {
     const dispatch = useDispatch();
     const country = useSelector((state: { covid: StateInterface }) => {
         return state.covid.country;
@@ -30,6 +21,22 @@ function CovidContainer(props: PropsInterface) {
     const resultsList = useSelector((state: { covid: StateInterface }) => {
         return state.covid.results;
     });
+
+    useEffect(() => {
+        if(!country) {
+            dispatch(ActionsCreators.setCountry('kyrgyzstan'));
+        }
+    }, [country, countriesList, dispatch]);
+
+    useEffect(() => {
+        dispatch(ActionsCreators.fetchCountries());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (country) {
+            dispatch(ActionsCreators.fetchResults(country));
+        }
+    }, [country, dispatch]);
 
     const findTopRecoveredCasesEntry = (resultsList: ResultInterface[]): topResultProps => {
         let cases: number = 0;
@@ -47,20 +54,6 @@ function CovidContainer(props: PropsInterface) {
 
         return { cases, date: resultingEntry.Date };
     };
-
-    useEffect(() => {
-        dispatch(ActionsCreators.setCountry('kyrgyzstan'));
-    }, [countriesList, dispatch])
-
-    useEffect(() => {
-        dispatch(ActionsCreators.fetchCountries());
-    }, [dispatch])
-
-    useEffect(() => {
-        if (country) {
-            dispatch(ActionsCreators.fetchResults(country));
-        }
-    }, [country, dispatch])
 
     return (
         <>
