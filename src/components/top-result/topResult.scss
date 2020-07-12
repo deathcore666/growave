@@ -1,0 +1,43 @@
+.top-container {
+    display: flex;
+    flex-direction: column;
+
+    width: 380px;
+    height: 450px;
+    background: #1BBC9B;
+    border-radius: 5px;
+    padding: 40px 20px 20px 20px;
+
+    .top-label {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 28px;
+        color: white;
+        align-self: center;
+    }
+
+    .top-cases {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 100px;
+        color: #FFFFFF;
+        align-self: center;
+
+        margin-top: 95px;
+    }
+
+    .top-date {
+        width: 100%;
+        border-width: 0.5px 0 0 0;
+        border-style: solid;
+        border-color: white;
+        padding-top: 20px;
+        margin-top: 145px;
+
+        font-style: normal;
+        font-weight: 500;
+        font-size: 22px;
+        color: #FFFFFF;
+        text-align: center;
+    }
+}

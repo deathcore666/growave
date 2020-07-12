@@ -6,22 +6,24 @@ import TopResult from '../components/top-result/index';
 import { CountriesList } from '../hooks/countriesList';
 import { ResutsList } from '../hooks/resultsList';
 import { Country } from '../hooks/country';
-import { IsLoading } from '../hooks/isLoading';
 import { findTopRecoveredCasesEntry } from '../helpers/findTopEntry';
+
+import './covidContainer.scss';
 
 function CovidContainer() {
     const countriesList = CountriesList();
     const resultsList = ResutsList();
     const { setCountry } = Country();
-    const isLoading = IsLoading();
 
     return (
-        <>
+        <div className='main-container'>
             <Select setCountry={(country) => setCountry(country)}
                     countries={countriesList}/>
-            { resultsList.length > 0 ? <Result results={resultsList}/> : <>Results came back empty</> }
-            { resultsList.length > 0 ? <TopResult { ...findTopRecoveredCasesEntry(resultsList) }/> : <>Results came back empty</> }
-        </>
+            <div className='results-container'>
+                <div className='results'>{ resultsList.length > 0 ? <Result results={resultsList}/> : <></> }</div>
+                { resultsList.length > 0 ? <TopResult { ...findTopRecoveredCasesEntry(resultsList) }/> : <></> }
+            </div>
+        </div>
     );
 }
 
