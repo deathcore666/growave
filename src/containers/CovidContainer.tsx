@@ -20,7 +20,6 @@ function CovidContainer() {
     const isError = IsError();
     const { setCountry } = Country();
 
-    console.log(isError)
     return (
         <div className='main-container'>
             <Select setCountry={(country) => setCountry(country)}
