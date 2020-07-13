@@ -20,24 +20,38 @@ function CovidContainer() {
     const isError = IsError();
     const { setCountry } = Country();
 
+    const renderLoading = () => {
+        if (isLoading) {
+            return (<div className='loading'>{loading}</div>);
+        }
+    }
+    const renderResult = () => {
+        if (resultsList.length > 0 && !isError) {
+            return (
+                <div className={ isLoading ? 'results-container opaque' : 'results-container'}>
+                    <div className='results'><Result results={resultsList}/></div>
+                    <TopResult { ...findTopRecoveredCasesEntry(resultsList) }/>
+                </div>
+            );
+        }
+    }
+    const renderErrorMessage = () => {
+        if (!isLoading && (resultsList.length === 0 || isError)) {
+            return (
+                <div className='empty-response'>
+                    {isError ? errRes :empty} 
+                </div> 
+            );
+        }
+    }
+ 
     return (
         <div className='main-container'>
             <Select setCountry={(country) => setCountry(country)}
                     countries={countriesList}/>
-            { isLoading && (<div className='loading'>{loading}</div>) }
-
-            {(resultsList.length > 0 && !isError) 
-            &&
-            <div className={ isLoading ? 'results-container opaque' : 'results-container'}>
-                <div className='results'><Result results={resultsList}/></div>
-                <TopResult { ...findTopRecoveredCasesEntry(resultsList) }/>
-            </div>}
-
-            {(!isLoading && (resultsList.length === 0 || isError)) 
-            && 
-            <div className='empty-response'>
-                {isError ? errRes :empty} 
-            </div>} 
+            {renderLoading()}
+            {renderResult()}
+            {renderErrorMessage()}
         </div>
     );
 }
